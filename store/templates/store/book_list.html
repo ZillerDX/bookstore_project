@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    {% load static %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-5">
+    <div class="max-w-4xl mx-auto bg-white p-5 shadow-lg rounded-lg">
+        <div class="flex justify-between">
+            <h2 class="text-3xl font-bold mb-5">Book List</h2>
+            <a href="{% url 'store:book_create' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">Add New Book</a>
+            <a href="{% url 'store:logout' %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mb-4">Logout</a>
+        </div>
+        <table class="table-auto w-full mb-5">
+            <thead>
+                <tr class="bg-blue-500 text-white">
+                    <th class="px-4 py-2">Cover</th>
+                    <th class="px-4 py-2">Title</th>
+                    <th class="px-4 py-2">Author</th>
+                    <th class="px-4 py-2">Price</th>
+                    <th class="px-4 py-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr class="bg-gray-100 text-center">
+                    <td class="border px-4 py-2">
+                        <!-- แสดงภาพหน้าปกหนังสือ และกำหนดขนาด -->
+                        {% if book.image %}
+                        <img src="{{ book.image.url }}" alt="{{ book.title }}" class="mx-auto" style="width: 100px; height: 150px; object-fit: cover;">
+                        {% else %}
+                        <span>No Image</span>
+                        {% endif %}
+                    </td>
+                    <td class="border px-4 py-2">{{ book.title }}</td>
+                    <td class="border px-4 py-2">{{ book.author }}</td>
+                    <td class="border px-4 py-2">${{ book.price }}</td>
+                    <td class="border px-4 py-2">
+                        <a href="{% url 'store:book_detail' book.id %}" class="bg-yellow-500 hover:bg-yellow-700 text-white py-1 px-2 rounded">View</a>
+                        <a href="{% url 'store:book_update' book.id %}" class="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded">Edit</a>
+                        <a href="{% url 'store:book_delete' book.id %}" class="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

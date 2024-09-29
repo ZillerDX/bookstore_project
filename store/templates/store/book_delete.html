@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Delete</title>
+    {% load static %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-5">
+    <div class="max-w-lg mx-auto bg-white p-5 shadow-lg rounded-lg">
+        <h2 class="text-2xl font-bold mb-5 text-center">Delete Book</h2>
+        <p class="mb-5 text-center">Are you sure you want to delete the book <strong>"{{ book.title }}"</strong>?</p>
+        
+        <div class="text-center">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Confirm Delete</button>
+                <a href="{% url 'store:book_list' %}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Cancel</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

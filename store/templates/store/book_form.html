@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ form.instance.id|yesno:"Edit Book,Add New Book" }}</title>
+    {% load static %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-5">
+    <div class="max-w-lg mx-auto bg-white p-8 shadow-lg rounded-lg">
+        <h2 class="text-3xl font-bold mb-5 text-center">{{ form.instance.id|yesno:"Edit Book,Add New Book" }}</h2>
+        
+        <form method="post" enctype="multipart/form-data" class="space-y-5">
+            {% csrf_token %}
+            
+            <!-- ชื่อหนังสือ -->
+            <div>
+                <label for="id_title" class="block text-gray-700 font-semibold mb-2">Book Title:</label>
+                {{ form.title }}
+            </div>
+
+            <!-- ผู้แต่ง -->
+            <div>
+                <label for="id_author" class="block text-gray-700 font-semibold mb-2">Author:</label>
+                {{ form.author }}
+            </div>
+
+            <!-- รายละเอียด -->
+            <div>
+                <label for="id_description" class="block text-gray-700 font-semibold mb-2">Description:</label>
+                {{ form.description }}
+            </div>
+
+            <!-- ราคา -->
+            <div>
+                <label for="id_price" class="block text-gray-700 font-semibold mb-2">Price:</label>
+                {{ form.price }}
+            </div>
+
+            <!-- จำนวนสินค้าใน Stock -->
+            <div>
+                <label for="id_stock" class="block text-gray-700 font-semibold mb-2">Stock:</label>
+                {{ form.stock }}
+            </div>
+
+            <!-- อัพโหลดหน้าปกหนังสือ -->
+            <div>
+                <label for="id_image" class="block text-gray-700 font-semibold mb-2">Book Cover Image:</label>
+                {{ form.image }}
+            </div>
+
+            <!-- ปุ่ม Submit -->
+            <div class="flex justify-center">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+                    {{ form.instance.id|yesno:"Update Book,Add Book" }}
+                </button>
+            </div>
+        </form>
+
+        <!-- ปุ่มกลับไปหน้า Book List -->
+        <div class="mt-5 text-center">
+            <a href="{% url 'store:book_list' %}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Back to List</a>
+        </div>
+    </div>
+</body>
+</html>

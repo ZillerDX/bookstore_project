@@ -1,0 +1,29 @@
+<!-- store/templates/store/book_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book.title }}</title>
+    {% load static %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-5">
+    <div class="max-w-lg mx-auto bg-white p-5 shadow-lg rounded-lg">
+        <h2 class="text-3xl font-bold mb-5">{{ book.title }}</h2>
+        <div class="flex justify-center mb-5">
+            <!-- แสดงรูปภาพ -->
+            {% if book.image %}
+            <img src="{{ book.image.url }}" alt="{{ book.title }}" class="h-48">
+            {% else %}
+            <span>No Image Available</span>
+            {% endif %}
+        </div>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Description:</strong> {{ book.description }}</p>
+        <p><strong>Price:</strong> ${{ book.price }}</p>
+        <p><strong>Stock:</strong> {{ book.stock }}</p>
+        <a href="{% url 'store:book_list' %}" class="bg-blue-500 text-white py-2 px-4 rounded mt-5 block text-center">Back to List</a>
+    </div>
+</body>
+</html>

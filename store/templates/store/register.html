@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <!-- เพิ่มคำสั่งนี้เพื่อบอก Django ให้โหลดแท็ก static -->
+    {% load static %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-5">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-5">Register</h1>
+
+        <!-- แสดงข้อความแจ้งเตือน -->
+        {% if messages %}
+        <div class="mb-4">
+            {% for message in messages %}
+            <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert">
+                <p class="font-bold">Success</p>
+                <p class="text-sm">{{ message }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="max-w-md mx-auto bg-white p-8 border border-gray-300 rounded">
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700">Username</label>
+                    {{ form.username }}
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700">Email</label>
+                    {{ form.email }}
+                </div>
+                <div class="mb-4">
+                    <label for="password1" class="block text-gray-700">Password</label>
+                    {{ form.password1 }}
+                </div>
+                <div class="mb-4">
+                    <label for="password2" class="block text-gray-700">Confirm Password</label>
+                    {{ form.password2 }}
+                </div>
+                
+                <div class="flex justify-center">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Register
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
